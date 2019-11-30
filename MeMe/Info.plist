@@ -2,10 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Phone Library is needed in order to save an image</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Phone Library is needed in orter to select an image</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera is needed in order to capture a meme image</string>
+	<string>Camera is needed in order to capture an image</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
