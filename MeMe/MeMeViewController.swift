@@ -16,6 +16,9 @@ class MeMeViewController: UIViewController,UIImagePickerControllerDelegate,UINav
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var botTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    var tableViewController : UIViewController!
+    var collectionViewController : UIViewController!
+    var memeTabBarController : UITabBarController!
     var isFirstKeyboardAppearence:Bool = false
     var uiImagePickerController : UIImagePickerController!
     let top = "TOP"
@@ -89,7 +92,7 @@ class MeMeViewController: UIViewController,UIImagePickerControllerDelegate,UINav
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.strokeWidth: -1,
-            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 52)!
         ]
         let textfieldArr = [topTextField,botTextField]
         for textField in textfieldArr{
@@ -186,11 +189,28 @@ class MeMeViewController: UIViewController,UIImagePickerControllerDelegate,UINav
         activityVC.completionWithItemsHandler = {activity,success,returnedItems,error in
             if(success){
                 self.save(memedImage: memedImage)
+                if(self.tableViewController != nil){
+                    let memeTableVC = (self.tableViewController as! MeMeTableViewController)
+                    if(memeTableVC.memes.capacity != (self.memeTabBarController as! MeMeTabBarController).memes.capacity){
+                        memeTableVC.memes = (self.memeTabBarController as! MeMeTabBarController).memes
+                    }
+                    memeTableVC.memeTableView.reloadData()
+                }
+                if(self.collectionViewController != nil){
+                    let memeCollectionVC = (self.collectionViewController as! MeMeCollectionViewController)
+                    if(memeCollectionVC.memes.capacity != (self.memeTabBarController as! MeMeTabBarController).memes.capacity){
+                           memeCollectionVC.memes = (self.memeTabBarController as! MeMeTabBarController).memes
+                       }
+                    memeCollectionVC.collectionView.reloadData()
+                }
             }
         }
         present(activityVC, animated: true, completion: nil)
     }
     func save(memedImage:UIImage){
-    let meme = MemeModel(topText: topTextField.text!, botText: botTextField.text!, image: memeImageView.image!, memedImage:memedImage)
+        if(memeImageView.image != nil){
+            let meme = MemeModel(topText: topTextField.text!, botText: botTextField.text!, image: memeImageView.image!, memedImage:memedImage)
+            (memeTabBarController as! MeMeTabBarController).memes.append(meme)
+        }
     }
 }
