@@ -1,7 +1,7 @@
 # MeMe
 Second project in the iOS developer nanodegree.
 MeMe is a simple meme generator, user can select a photo or take a photo and use it as a meme background,
-create his own meme and share it, when meme is created and shared it is displayed in table or in collection.
+create his own meme and share it, when meme is created and shared it is displayed in a table or collection.
 
 ### Images
 
